@@ -1,41 +1,46 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace of mind from prototype to production</p>
-</section>
+<div class="flex items-center items-center justify-center sm:gap-8">
+  <div class='flex flex-col sm:items-center w-auto sm:basis-1/2 my-5 '>
+    <h1 class='text-4xl mb-5 text-center'>Get your<br> license today</h1>
+    <button class="p-2 bg-darkgreen rounded">Get Started</button>
+  </div>
+  <div class='w-auto sm:basis-1/2 my-5'>
+</div>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.6/CHANGELOG.md">v1.6 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://web.libera.chat/#elixir">#elixir on Libera Chat (IRC)</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-      <li>
-        <a href="https://discord.gg/elixir">Elixir on Discord</a>
-      </li>
-    </ul>
-  </article>
-</section>
+
+
+</div>
+<div class=" flex flex-col justify-center items-center h-full bg-white p-10">
+  <h1 class='text-5xl mb-7'>My Story</h1>
+  <div class="flex flex-col md:flex-row justify-center px-10 pb-8 gap-y-5">
+    <div >
+      <h1 class="text-4xl text-center mb-4">20+ year experience</h1>
+      <p class='text-center text-sm'>My name is <span class="font-bold">John Doe</span> and I am a <span class="font-bold">professional driver</span> with over 20 years of experience. I have been teaching people how to drive for over 10 years and I am here to help you get your license today.</p>
+    </div>
+    <div>
+      <h1 class="text-4xl text-center mb-4">80+ locaties</h1>
+      <p class='text-center text-sm '>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+    </div>
+    <div>
+      <h1 class="text-4xl text-center mb-4">1000+ graduates</h1>
+      <p class='text-center text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+    </div>
+  </div>
+  </div>
+
+      <%= for course <- @courses do %>
+      <div class="flex flex-col sm:flex-row justify-center items-center sm:justify-start h-full rounded p-10">
+        <div class="bg-lightBlue rounded" id={"course-#{course.id}"}>
+          <section class='p-8'>
+            <p><%= course.name %></p>
+            <p><%= course.description %></p>
+            <p><%= course.price %></p>
+            <p><%= course.duration %></p>
+          </section>
+          <div class='flex bg-darkBlue justify-center items-center rounded-b'>
+            <button class="bg-darkgreen rounded m-2 w-32"> Get started</button>
+          </div>
+        </div>
+
+      </div>
+
+      <% end %>

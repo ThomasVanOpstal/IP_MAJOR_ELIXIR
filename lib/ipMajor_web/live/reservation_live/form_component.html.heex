@@ -1,0 +1,41 @@
+<div class="bg-white flex flex-col p-8 rounded gap-y-4">
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="reservation-form"
+    return_to={Routes.reservation_index_path(@socket, :index)}
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save"
+    class="flex flex-col justify-start rounded gap-y-4">
+    <div>
+      <%= label f, :date , class: "text-darkBlue font-bold"%>
+      <div class='border-solid border-2 border-lightGray rounded'>
+        <%= date_select f, :date %>
+      </div>
+      <%= error_tag f, :date %>
+    </div>
+
+    <div>
+      <%= label f, :status , class: "text-darkBlue font-bold"%>
+      <%= text_input f, :status, class: "border-solid border-2 border-lightGray rounded w-full" %>
+      <%= error_tag f, :status %>
+    </div>
+    <div>
+      <%= label f, :comments, class: "text-darkBlue font-bold" %>
+      <%= text_input f, :comments, class: "border-solid border-2 border-lightGray rounded w-full" %>
+      <%= error_tag f, :comments %>
+    </div>
+
+    <div>
+      <%= label f, :duration, class: "text-darkBlue font-bold" %>
+      <div class='border-solid border-2 border-lightGray rounded w-full'>
+        <%= time_select f, :duration%>
+      </div>
+      <%= error_tag f, :duration %>
+    </div>
+
+      <%= submit "Submit",class: "bg-darkgreen rounded", phx_disable_with: "Saving..."%>
+  </.form>
+</div>

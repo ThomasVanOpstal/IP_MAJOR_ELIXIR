@@ -26,7 +26,8 @@ config :ipMajor, IpMajorWeb.Endpoint,
   secret_key_base: "yZaPV3cTRj9O6cKPxqis4kNWS3Wx4LMGEDY8kCTzoPIlna7NShTh48kUqpXiXBz7",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support

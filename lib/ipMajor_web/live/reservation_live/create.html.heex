@@ -1,0 +1,50 @@
+<div class="flex items-center flex-col sm:flex-row bg-darkBlue items-center justify-center sm:gap-8">
+  <div class='flex flex-col sm:basis-1/2 items-center w-auto my-5 '>
+    <h1 class='text-4xl mb-5 text-center'>Course</h1>
+    <ul>
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ul>
+  </div>
+  <div class='sm:w-auto max-w-md sm:basis-1/2 m-12 rounded'>
+      <%= if @live_action in [:new, :edit] do %>
+          <.live_component
+          module={IpMajorWeb.ReservationLive.FormComponent}
+          id={@reservation.id || :new}
+          title={@page_title}
+          action={@live_action}
+          reservation={@reservation}
+          return_to={Routes.reservation_index_path(@socket, :index)}
+          />
+    <% end %>
+  </div>
+</div>
+
+<div class=" flex flex-col justify-center items-center h-full bg-white p-10">
+  <h1 class='text-5xl mb-7'>Frequently asked questions</h1>
+
+  <div class="flex flex-col  justify-center px-10 pb-8 gap-y-5">
+    <div class="flex flex-col justify-center items-center gap-y-2">
+      <h2 class='text-3xl'>What is the course about?</h2>
+      <p class='text-xl'>The course is about learning how to code in Elixir and Phoenix.</p>
+    </div>
+  </div>
+</div>
+<div>
+  <table>
+    <tr>
+      <th>Company</th>
+      <th>Contact</th>
+      <th>Country</th>
+    </tr>
+    <tr>
+      <td>Alfreds Futterkiste</td>
+      <td>Maria Anders</td>
+      <td>Germany</td>
+    </tr>
+  </table>
+</div>
+
+
+  <span><%= live_patch "New Course", to: Routes.course_index_path(@socket, :new) %></span>

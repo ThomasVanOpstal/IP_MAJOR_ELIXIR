@@ -1,0 +1,49 @@
+<div class="flex items-center items-center justify-center sm:gap-8">
+  <div class='flex flex-col items-center w-auto my-5 '>
+    <h1 class='text-4xl mb-5 text-center'>Ready to get started? </h1>
+    <button class="p-2 bg-darkgreen rounded">Choose a course</button>
+  </div>
+  <div class='w-auto sm:basis-1/2 my-5'>
+
+  </div>
+</div>
+
+<div class=" flex flex-col justify-center items-center h-full bg-white p-10">
+  <h1 class='text-5xl mb-7'>My Story</h1>
+
+  <div class="flex flex-col md:flex-row justify-center px-10 pb-8 gap-y-5">
+    <div >
+      <h1 class="text-4xl text-center mb-4">20+ year experience</h1>
+      <p class='text-center text-sm'>My name is <span class="font-bold">John Doe</span> and I am a <span class="font-bold">professional driver</span> with over 20 years of experience. I have been teaching people how to drive for over 10 years and I am here to help you get your license today.</p>
+    </div>
+    <div>
+      <h1 class="text-4xl text-center mb-4">80+ locaties</h1>
+      <p class='text-center text-sm '>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+    </div>
+    <div>
+      <h1 class="text-4xl text-center mb-4">1000+ graduates</h1>
+      <p class='text-center text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+    </div>
+  </div>
+  </div>
+
+      <%= for course <- @courses do %>
+
+      <div class="flex flex-col sm:flex-row justify-center items-center sm:justify-start h-full  p-10">
+        <div class="bg-lightBlue" id={"course-#{course.id}"}>
+          <section class='p-8'>
+            <p><%= course.name %></p>
+            <p><%= course.description %></p>
+            <p><%= course.price %></p>
+            <p><%= course.duration %></p>
+          </section>
+          <div class='flex bg-darkBlue justify-center items-center'>
+            <button class="bg-darkgreen rounded m-2 w-32"> Get started</button>
+          </div>
+        </div>
+
+      </div>
+
+      <% end %>
+
+  <span><%= live_patch "New Course", to: Routes.course_index_path(@socket, :new) %></span>

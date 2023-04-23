@@ -1,0 +1,56 @@
+<h1>Show Payment</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.payment_show_path(@socket, :show, @payment)}>
+    <.live_component
+      module={IpMajorWeb.PaymentLive.FormComponent}
+      id={@payment.id}
+      title={@page_title}
+      action={@live_action}
+      payment={@payment}
+      return_to={Routes.payment_show_path(@socket, :show, @payment)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Amount:</strong>
+    <%= @payment.amount %>
+  </li>
+
+  <li>
+    <strong>Payment date:</strong>
+    <%= @payment.payment_date %>
+  </li>
+
+  <li>
+    <strong>Payment method:</strong>
+    <%= @payment.payment_method %>
+  </li>
+
+  <li>
+    <strong>Payment status:</strong>
+    <%= @payment.payment_status %>
+  </li>
+
+  <li>
+    <strong>Payment type:</strong>
+    <%= @payment.payment_type %>
+  </li>
+
+  <li>
+    <strong>Payment reference:</strong>
+    <%= @payment.payment_reference %>
+  </li>
+
+  <li>
+    <strong>Paymeny comments:</strong>
+    <%= @payment.paymeny_comments %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.payment_show_path(@socket, :edit, @payment), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.payment_index_path(@socket, :index) %></span>

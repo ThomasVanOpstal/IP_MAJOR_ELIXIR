@@ -1,0 +1,61 @@
+<h1>Show Course</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.course_show_path(@socket, :show, @course)}>
+    <.live_component
+      module={IpMajorWeb.CourseLive.FormComponent}
+      id={@course.id}
+      title={@page_title}
+      action={@live_action}
+      course={@course}
+      return_to={Routes.course_show_path(@socket, :show, @course)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @course.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @course.description %>
+  </li>
+
+  <li>
+    <strong>Price:</strong>
+    <%= @course.price %>
+  </li>
+
+  <li>
+    <strong>Duration:</strong>
+    <%= @course.duration %>
+  </li>
+
+  <li>
+    <strong>Max participants:</strong>
+    <%= @course.max_participants %>
+  </li>
+
+  <li>
+    <strong>Min participants:</strong>
+    <%= @course.min_participants %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @course.status %>
+  </li>
+
+  <li>
+    <strong>Comments:</strong>
+    <%= @course.comments %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.course_show_path(@socket, :edit, @course), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.course_index_path(@socket, :index) %></span>

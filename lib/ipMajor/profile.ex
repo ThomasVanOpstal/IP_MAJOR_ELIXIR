@@ -6,6 +6,7 @@ defmodule IpMajor.Profile do
     field :firstname, :string
     field :lastname, :string
     field :email, :string
+    field :role, Ecto.Enum, values: [:admin, :user]
     field :birthday, :date
     field :comments, :string
 
@@ -16,13 +17,18 @@ defmodule IpMajor.Profile do
   @doc false
   def changeset(profile, attrs) do
     profile
-    |> cast(attrs, [:firstname, :lastname, :email, :birthday, :comments])
-    |> validate_required([:firstname, :lastname, :email, :birthday, :comments])
-    |> unique_constraint(:email)
+    |> cast(attrs, [:firstname, :lastname, :email, :role, :birthday, :comments, :user_id])
+    |> validate_required([:firstname, :lastname, :email, :birthday, :comments, :user_id])
+    |> unique_constraint([:email, :user_id])
     |> validate_change(:birthday, &older_than_18/2)
     |> validate_format(:email, ~r/@/)
   end
 
+  def add_user(profile, user) do
+    profile
+    |> cast(%{}, [:user_id])
+    |> put_assoc(:user, user)
+  end
 
   def older_than_18(:birthday, birthday) do
     {year, month, day} = Date.to_erl(Date.utc_today())
