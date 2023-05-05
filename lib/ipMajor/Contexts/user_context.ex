@@ -17,12 +17,19 @@ defmodule IpMajor.Contexts.UserContext do
     Phoenix.PubSub.subscribe(IpMajor.PubSub, @topic <> "#{user_id}")
   end
 
-  def create_user(attr) do
+  # def create_user(attr) do
+  #   %User{}
+  #   |> User.changeset(attr)
+  #   |> Repo.insert()
+  #   |> notify_subscribers([:user, :created])
+  # end
+
+  def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attr)
+    |> User.changeset(attrs)
     |> Repo.insert()
-    |> notify_subscribers([:user, :created])
   end
+  
 
   def list_users do
     Repo.all(User)

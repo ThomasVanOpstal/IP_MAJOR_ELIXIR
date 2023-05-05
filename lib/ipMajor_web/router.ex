@@ -18,6 +18,8 @@ defmodule IpMajorWeb.Router do
   scope "/", IpMajorWeb do
     pipe_through :browser
 
+    
+
     #live "/users", UserLive.Index
     #live "/users/:id", UserLive.Show
     #live "/users/:id/edit", UserLive.Edit
@@ -29,6 +31,9 @@ defmodule IpMajorWeb.Router do
 
     #live "/profiles/:id", ProfileLive.Show, :show
     #live "/profiles/:id/show/edit", ProfileLive.Show, :edit
+
+    live "/login", LoginLive.Index
+    live "/register", RegisterLive.Index
 
     live "/reservations/create", ReservationLive.Create, :new
 

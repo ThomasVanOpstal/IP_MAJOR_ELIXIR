@@ -6,22 +6,37 @@ defmodule IpMajor.User do
   @topic inspect(__MODULE__)
 
 
+  # schema "users" do
+  #   field :username, :string
+  #   field :not_hashed_password, :string, virtual: true
+  #   field :password, :string, redact: true
+  #   has_many(:profile, IpMajor.Profile)
+  #   has_many(:reservation, IpMajor.Reservation)
+  #   timestamps()
+  # end
+
   schema "users" do
     field :username, :string
-    field :not_hashed_password, :string, virtual: true
-    field :password, :string, redact: true
-    has_many(:profile, IpMajor.Profile)
-    has_many(:reservation, IpMajor.Reservation)
+    field :password, :string
+
     timestamps()
   end
 
+  @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :not_hashed_password])
-    |> validate_required([:username, :not_hashed_password])
+    |> cast(attrs, [:username, :password])
+    |> validate_required([:username, :password])
     |> unique_constraint(:username)
-    |> put_password_hash()
   end
+
+  # def changeset(user, attrs) do
+  #   user
+  #   |> cast(attrs, [:username, :not_hashed_password])
+  #   |> validate_required([:username, :not_hashed_password])
+  #   |> unique_constraint(:username)
+  #   |> put_password_hash()
+  # end
 
 
 

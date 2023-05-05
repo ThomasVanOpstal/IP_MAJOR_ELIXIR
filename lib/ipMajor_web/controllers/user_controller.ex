@@ -2,6 +2,7 @@ defmodule IpMajorWeb.UserController do
   use IpMajorWeb, :controller
 
   alias IpMajor.Contexts.UserContext
+  alias IpMajor.Contexts.UserContext.User
   alias IpMajor.User
   alias IpMajor.Repo
 
@@ -22,6 +23,19 @@ defmodule IpMajorWeb.UserController do
         render(conn, "new.html", changeset: changeset)
     end
   end
+
+  # def create(conn, %{"user" => user_params}) do
+  #   case UserContext.create_user(user_params) do
+  #     {:ok, user} ->
+  #       conn
+  #       |> put_flash(:info, "User created successfully.")
+  #       |> redirect(to: Routes.user_path(conn, :show, user.id))
+  
+  #     {:error, %Ecto.Changeset{} = changeset} ->
+  #       render(conn, "new.html", changeset: changeset)
+  #   end
+  # end
+  
 
   def index(conn, _params) do
     users = UserContext.list_users()

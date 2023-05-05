@@ -3,9 +3,9 @@ import Config
 # Configure your database
 config :ipMajor, IpMajor.Repo,
   username: "postgres",
-  password: "ThomasVanOpstal",
+  password: "12345",
   hostname: "localhost",
-  database: "ip_major_project_dev",
+  database: "ipmajorv6",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
