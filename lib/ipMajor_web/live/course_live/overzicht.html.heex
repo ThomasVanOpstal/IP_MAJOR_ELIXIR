@@ -6,47 +6,28 @@
 
 </div>
 
-<div class=" flex flex-col justify-center items-center h-full  p-10">
+<div class=" flex flex-col justify-center items-center h-full m-4  p-10">
 
 
-  <div class="flex flex-col md:flex-row justify-center px-10 pb-8 gap-y-10 md:gap-x-10">
-    <div class="p-4 bg-white rounded basis-1/3">
-      <h1 class="text-4xl text-center mb-4">Beginner</h1>
-      <p class='text-center text-sm'>To learn all the basiscs</p>
-      <button> See all features</button>
+  <div class="flex flex-col md:flex-row justify-center px-10 pb-8 gap-y-10 md:gap-x-10 h-80 ">
+    <div class="p-4 bg-white relative rounded basis-1/3 hover:bg-darkBlue hover:text-white text-center md:h-full p-2">
+      <h1 class="text-4xl text-center mb-4 ">Beginner</h1>
+      <p class='text-center text-sm '>To learn all the basiscs</p>
+      <button phx-click="showTable" phx-value-id={Enum.at(@courses, 0).id} class ="bg-darkgreen p-2 mx-4 my-4 absolute inset-x-0 bottom-4 rounded mt-2"> See all features</button>
     </div>
-    <div class="p-4 bg-white rounded basis-1/3">
-      <h1 class="text-4xl text-center mb-4">Advanced</h1>
+    <div class="p-4 bg-white relative rounded basis-1/3 hover:bg-darkBlue hover:text-white text-center h-full">
+      <h1 class="text-4xl  text-center mb-4 ">Advanced</h1>
       <p class='text-center text-sm '>The last step to getting that license</p>
-      <button> Get started</button>
-      <button> See all features</button>
+      <button phx-click="showTable" phx-value-id={Enum.at(@courses, 0).id} class =" bg-darkgreen p-2 mx-4 my-4 absolute inset-x-0 bottom-4 rounded mt-2"> See all features</button>
 
     </div>
-    <div class="p-4 bg-darkBlue rounded basis-1/3">
-      <h1 class="text-4xl text-center mb-4">From zero to hero</h1>
+    <div class="p-4 bg-white relative rounded basis-1/3 hover:bg-darkBlue hover:text-white text-center h-full">
+      <h1 class="text-4xl text-center mb-4">Zero to hero</h1>
       <p class='text-center text-sm'>From beginner to expert</p>
-      <button> Get started</button>
-      <button> See all features</button>
-
+      <button phx-click="showTable" phx-value-id={Enum.at(@courses, 0).id} class ="bg-darkgreen p-2 mx-4 my-4 absolute inset-x-0 bottom-4 rounded mt-2">See all features</button>
     </div>
   </div>
   </div>
-    <%= for course <- @courses do %>
-
-
-      <div class="flex flex-col sm:flex-row justify-center items-center sm:justify-start h-full bg-white  p-10">
-
-        <div class='' id={"course-#{course.id}"}>
-          <section class='p-8'>
-            <p><%= course.name %></p>
-            <p><%= course.description %></p>
-            <p><%= course.price %></p>
-            <p><%= course.duration %></p>
-            <%= live_patch "Make a reservation", to: Routes.reservation_create_path(@socket, :new, course_id: course.id ) %>
-          </section>
-          <div class='flex  justify-center items-center'>
-            <button class=' rounded m-2 w-32'> Get started</button>
-          </div>
-        </div>
-        </div>
-      <% end %>
+  <%= if @showTable do %>
+    <.live_component module={TableComponent} id="hero" content={5} />
+  <% end %>

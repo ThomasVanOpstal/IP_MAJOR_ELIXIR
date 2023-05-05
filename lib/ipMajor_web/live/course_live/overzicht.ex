@@ -3,10 +3,18 @@ defmodule IpMajorWeb.CourseLive.Overzicht do
 
   alias IpMajor.Contexts.Courses
   alias IpMajor.Course
+  alias IpMajorWeb.CourseLive.TableComponent
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :courses, list_courses())}
+    {:ok, assign(socket, showTable: false)}
+  end
+
+  def handle_event("showTable",%{"id" => id}, socket) do
+    socket
+    |> assign(:course, Courses.get_course!(String.to_integer(id)))
+
+    {:noreply, assign(socket, showTable: true)}
   end
 
   @impl true
@@ -14,17 +22,19 @@ defmodule IpMajorWeb.CourseLive.Overzicht do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
   defp apply_action(socket, :redirect, _params) do
-    {:noreply, push_patch(socket, to: Routes.reservation_create_path(@conn, :create))}
-
+    {:noreply, push_patch(socket, to: Routes.reservation_create_path(socket, :create))}
   end
+
   defp list_courses do
     Courses.list_courses()
   end
-
   defp apply_action(socket, :overzicht, _params) do
     socket
-    |> assign(:page_title, "Listing Courses")
-    |> assign(:course, nil)
+    |> assign(:page_title, page_title(:getCourse))
+    |> assign(:courses, list_courses())
   end
+  defp page_title(:getCourse), do: "Course Features"
+  defp page_title(:overzicht), do: "Overview Course"
+
 
 end

@@ -2,8 +2,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Inter+Tight&family=Merriweather:wght@900&family=Overpass:wght@300&display=swap');
+
 /* This file is for your main application CSS */
 
 body{
 background-color: #C5D3E3;
+font-family: 'Inter', sans-serif;
 }
