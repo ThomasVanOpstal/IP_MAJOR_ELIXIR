@@ -3,6 +3,8 @@ defmodule IpMajorWeb.ReservationLive.Create do
 
   alias IpMajor.Contexts.{Courses, Reservations}
   alias IpMajor.{Course, Reservation}
+
+  @impl true
   def mount(_params, _session, socket) do
     {:ok, socket}
   end
@@ -16,6 +18,7 @@ defmodule IpMajorWeb.ReservationLive.Create do
   defp apply_action(socket, :new, %{"course_id"=>id}) do
     socket
     |> assign(:page_title, "New Reservation")
-    |> assign(:reservation, %Reservation{course_id: id})
+    |> assign(:course, Courses.get_course!(String.to_integer(id)))
+    |> assign(:reservation, %Reservation{course_id: String.to_integer(id), user_id: 1})
   end
 end

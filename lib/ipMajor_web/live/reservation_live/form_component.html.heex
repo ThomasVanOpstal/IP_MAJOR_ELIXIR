@@ -36,6 +36,22 @@
       <%= error_tag f, :duration %>
     </div>
 
+    <div>
+      <%= label f, :start_time, class: "text-darkBlue font-bold" %>
+      <div class='border-solid border-2 border-lightGray rounded w-full'>
+        <%= time_select f, :start_time%>
+      </div>
+      <%= error_tag f, :start_time %>
+    </div>
+
+    <div>
+      <%= label f, :end_time, class: "text-darkBlue font-bold" %>
+      <div class='border-solid border-2 border-lightGray rounded w-full'>
+        <%= time_select f, :end_time%>
+      </div>
+      <%= error_tag f, :end_time %>
+    </div>
+
       <%= submit "Submit",class: "bg-darkgreen rounded", phx_disable_with: "Saving..."%>
   </.form>
 </div>

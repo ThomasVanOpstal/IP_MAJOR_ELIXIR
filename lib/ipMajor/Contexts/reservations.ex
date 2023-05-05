@@ -33,7 +33,7 @@ defmodule IpMajor.Contexts.Reservations do
       %Reservation{}
 
   """
-  def get_reservation!(id) do
+  def get_reservation(id) do
     Repo.get!(Reservation, id)
 
   end
@@ -50,13 +50,10 @@ defmodule IpMajor.Contexts.Reservations do
       {:error, ...}
 
   """
-  def create_reservation(attrs \\ %{}) do
-
-    %Reservation{}
+  def create_reservation(%Reservation{} = reservation, attrs \\ %{}) do
+    reservation
     |> Reservation.changeset(attrs)
-    |> Repo.insert!()
-
-
+    |> Repo.insert()
   end
 
   @doc """

@@ -6,6 +6,7 @@ defmodule IpMajorWeb.ReservationLive.FormComponent do
 
   @impl true
   def update(%{reservation: reservation} = assigns, socket) do
+
     changeset = Reservations.change_reservation(reservation)
     {:ok,
      socket
@@ -43,9 +44,12 @@ defmodule IpMajorWeb.ReservationLive.FormComponent do
 
   defp save_reservation(socket, :new, reservation_params) do
     IO.inspect(reservation_params)
-    case Reservations.create_reservation(reservation_params) do
-      {:ok, _reservation} ->
+    require IEx; IEx.pry()
+
+    case Reservations.create_reservation(socket.assigns.reservation, reservation_params) do
+      {:ok, reservation} ->
         {:noreply,
+
          socket
          |> put_flash(:info, "Reservation created successfully")
          |> push_redirect(to: socket.assigns.return_to)}

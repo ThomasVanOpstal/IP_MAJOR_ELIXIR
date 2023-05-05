@@ -17,7 +17,11 @@ module.exports = {
         'darkgreen':'#23AEBC',
         'darkBlue':'#1C355E',
         'lightBlue':'#193D83',
+        'babyBlue': '#39A5F7',
         'lightGray':'#ededed',
+    },
+    fontFamily: {
+      'inter' : ['Inter', 'sans-serif'],
     },
   },
   plugins: [
