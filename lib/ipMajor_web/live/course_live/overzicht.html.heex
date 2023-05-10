@@ -26,8 +26,10 @@
       <p class='text-center text-sm'>From beginner to expert</p>
       <button phx-click="showTable" phx-value-id={Enum.at(@courses, 0).id} class ="bg-darkgreen p-2 mx-4 my-4 absolute inset-x-0 bottom-4 rounded mt-2">See all features</button>
     </div>
+
+
   </div>
   </div>
   <%= if @showTable do %>
-    <.live_component module={TableComponent} id="hero" content={5} />
+    <.live_component module={TableComponent} id="hero" idCourse={assigns.idCourse} />
   <% end %>

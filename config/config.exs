@@ -28,6 +28,10 @@ config :ipMajor, IpMajor.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
+config :IpMajor, IpMajor.Auth.Guardian,
+  issuer: "IpMajor",
+  secret_key: "WEk0sgbO156wY4Z+HmzgE/4gzpZi26SXaPtQ9rpqniF4irc8kWyrLGtrizp4y5K9"
+
 
 # Configure esbuild (the version is required)
 config :esbuild,

@@ -8,15 +8,16 @@ defmodule IpMajorWeb.CourseLive.TableComponent do
   end
 
   def update(assigns, socket) do
+    require IEx; IEx.pry()
     {:ok, socket
     |> assign(assigns)
-    |> assign(:course, Courses.get_course!(11))
-  }
+    |> assign(:course, Courses.get_course!(assigns.idCourse))}
+
   end
   def render(assigns) do
     ~H"""
-    <div class="items-center p-8">
-      <table id="hero">
+    <div class="items-center p-8 w-full">
+      <table class ="w-full" id="hero">
         <thead class="text-xs uppercase dark:bg-gray-700 dark:text-gray-400">
         <tr>
             <th scope="col" class="px-6 py-3">Description</th>

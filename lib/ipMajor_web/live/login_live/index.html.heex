@@ -1,6 +1,6 @@
-<div class="flex items-center items-center justify-center sm:gap-8">
-  <div class='flex flex-col items-center w-auto my-5 '>
-    <h1 class='text-4xl mb-5 text-center'>Log in </h1>
+<!--<div Class="flex items-center items-center justify-center sm:gap-8">
+  <div Class='flex flex-col items-center w-auto my-5 '>
+    <h1 Class='text-4xl mb-5 text-center'>Log in </h1>
     <form method="post" action="/login">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username"><br>
@@ -10,6 +10,63 @@
 
       <button type="submit">Submit</button>
     </form>
-    <p class='mt-5 text-center'>Don't have an account yet? <a href="/register" class='text-blue-500 underline'>Register here</a></p>
-  </div>
+    <p Class='mt-5 text-center'>Don't have an account yet? <a href="/register" Class='text-blue-500 underline'>Register here</a></p>
 </div>
+</div>>-->
+
+
+<section>
+
+          <div>
+              <.form
+                let={f}
+                for={@changeset}
+                id="login-form"
+                phx-change="validate"
+                phx-submit="save">
+                  <div>
+                      <label for="signup_name" >Name</label>
+                      <div >
+                          <%= text_input f, :username%>
+                          <span >
+                              <i ></i>
+                          </span>
+                      </div>
+                      <%= error_tag f, :username %>
+                  </div>
+
+                  <div >
+                      <label for="signup_password">Password</label>
+                      <div >
+                          <%= password_input f, :not_hashed_password%>
+                          <span >
+                              <i ></i>
+                          </span>
+                      </div>
+                      <%= error_tag f, :not_hashed_password %>
+                  </div>
+                  <div >
+                      <label for="signup_password_confirmation" >Password Confirmation</label>
+                      <div>
+                          <%= password_input f, :password_confirmation %>
+                          <span >
+                              <i></i>
+                          </span>
+                      </div>
+                      <%= error_tag f, :password_confirmation %>
+                  </div>
+                  <div>
+                      <div >
+                          <%= submit [phx_disable_with: "Saving..."] do %>
+                              <span>
+                                  Continue
+                              </span>
+                              <span >
+                                  <i ></i>
+                              </span>
+                          <% end %>
+                      </div>
+                  </div>
+                 </.form>
+                </div>
+</section>

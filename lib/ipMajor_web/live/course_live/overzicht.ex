@@ -7,14 +7,18 @@ defmodule IpMajorWeb.CourseLive.Overzicht do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, showTable: false)}
+    socket = socket
+    |> assign(:showTable, false)
+    {:ok, socket}
   end
 
   def handle_event("showTable",%{"id" => id}, socket) do
-    socket
-    |> assign(:course, Courses.get_course!(String.to_integer(id)))
+    require IEx; IEx.pry()
 
-    {:noreply, assign(socket, showTable: true)}
+    socket = socket
+    |> assign(:idCourse, String.to_integer(id))
+    |> assign(:showTable, true)
+    {:noreply, socket}
   end
 
   @impl true
