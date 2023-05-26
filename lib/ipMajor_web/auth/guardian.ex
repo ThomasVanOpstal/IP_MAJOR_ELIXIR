@@ -1,5 +1,6 @@
 defmodule IpMajorWeb.Auth.Guardian do
-  use Guardian, otp_app: :ipMajor
+  use Guardian, otp_app: :IpMajor
+  alias Guardian.Plug
   alias IpMajor.Contexts.{Profiles, UserContext}
 
   def subject_for_token(%{id: id}, _claims) do
@@ -22,12 +23,14 @@ defmodule IpMajorWeb.Auth.Guardian do
     {:error, :no_id_provided}
   end
 
+
+
   def authenticate(username, password) do
     case UserContext.get_user_by_username(username) do
       nil -> {:error, :unauthored}
       user ->
         case validate_password(password, user.password) do
-          true ->  {:ok}#create_token(user)
+          true ->  create_token(user)
           false -> {:error, :unauthorized}
         end
     end
@@ -36,9 +39,16 @@ defmodule IpMajorWeb.Auth.Guardian do
     Bcrypt.verify_pass(password, hash_password)
   end
 
-  # defp create_token(account) do
-  #   {:ok, token, _claims} = encode_and_sign(user)
-  #   {:ok, account, token}
-  # end
+  defp create_token(user) do
+     {:ok, token, _claims} = encode_and_sign(user)
+
+     {:ok, user, token}
+  end
+
+  def sign_in(socket, user, token) do
+    conn = socket.conn
+    |> Plug.put_session(:current_user, user.id)
+    |> Plug.put_session(:token, token)
+  end
 
 end

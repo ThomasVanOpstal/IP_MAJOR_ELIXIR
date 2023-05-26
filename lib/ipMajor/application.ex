@@ -15,9 +15,11 @@ defmodule IpMajor.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: IpMajor.PubSub},
       # Start the Endpoint (http/https)
-      IpMajorWeb.Endpoint
+      IpMajorWeb.Endpoint,
       # Start a worker by calling: IpMajor.Worker.start_link(arg)
       # {IpMajor.Worker, arg}
+      {IpMajor.Server, []}
+
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

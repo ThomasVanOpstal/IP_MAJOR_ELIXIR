@@ -45,11 +45,7 @@ defmodule IpMajor.Contexts.Trainers do
       {:error, ...}
 
   """
-  def create_trainer(attrs \\ %{}) do
-    %Trainer{}
-    |> Trainer.changeset(attrs)
-    |> Repo.insert()
-  end
+
 
   @doc """
   Updates a trainer.
@@ -63,11 +59,7 @@ defmodule IpMajor.Contexts.Trainers do
       {:error, ...}
 
   """
-  def update_trainer(%Trainer{} = trainer, attrs) do
-    trainer
-    |> Trainer.changeset(attrs)
-    |> Repo.update()
-  end
+
 
   @doc """
   Deletes a Trainer.
@@ -94,7 +86,5 @@ defmodule IpMajor.Contexts.Trainers do
       %Todo{...}
 
   """
-  def change_trainer(%Trainer{} = trainer, _attrs \\ %{}) do
-    trainer
-  end
+
 end

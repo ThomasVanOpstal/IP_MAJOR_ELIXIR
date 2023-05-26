@@ -8,7 +8,6 @@ defmodule IpMajor.User do
 
   schema "users" do
     field :username, :string
-    field :not_hashed_password, :string, virtual: true
     field :password, :string, redact: true
     field :password_confirmation, :string, virtual: true
     field :remember_me, :boolean, virtual: true, default: false
@@ -25,27 +24,30 @@ defmodule IpMajor.User do
   #end
 
   @doc false
-  # def changeset(user, attrs) do
-  #   user
-  #   |> cast(attrs, [:username, :password])
-  #   |> validate_required([:username, :password])
-  #   |> unique_constraint(:username)
-  # end
+  def changeset(user, attrs) do
+     user
+     |> cast(attrs, [:username, :password])
+     |> validate_required([:username, :password])
+     |> unique_constraint(:username)
+     |> validate_length(:password, min: 8, max: 16)
+   end
+
+
   def registration_changeset(user, params) do
-    fields = ~w(username not_hashed_password password_confirmation)a
+    fields = ~w(username password)a
     user
     |> cast(params, fields)
     |> validate_required(fields)
-    |> validate_confirmation(:not_hashed_password)
-    |> validate_length(:not_hashed_password, min: 8, max: 16)
+    |> validate_confirmation(:password)
+    |> validate_length(:password, min: 8, max: 16)
     |> unique_constraint(:username)
     |> put_hash
   end
 
 
   defp put_hash(%Ecto.Changeset{valid?: false} = changeset), do: changeset
-  defp put_hash(%Ecto.Changeset{valid?: true, changes: %{not_hashed_password: not_hashed_password}} = changeset) do
-    change(changeset, Pbkdf2.add_hash(not_hashed_password))
+  defp put_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, password: Bcrypt.hash_pwd_salt(password))
   end
 
 

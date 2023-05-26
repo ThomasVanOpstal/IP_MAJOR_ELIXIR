@@ -1,8 +1,9 @@
 defmodule IpMajor.Contexts.UserContext do
+  alias Hex.API.Auth
   alias IpMajor.User
   alias IpMajor.Repo
   import Ecto.Query, warn: false
-
+  alias IpMajorWeb.Auth.Guardian
 
   @topic inspect(__MODULE__)
 
@@ -17,6 +18,8 @@ defmodule IpMajor.Contexts.UserContext do
     Phoenix.PubSub.subscribe(IpMajor.PubSub, @topic <> "#{user_id}")
   end
 
+
+
   # def create_user(attr) do
   #   %User{}
   #   |> User.changeset(attr)
@@ -26,8 +29,15 @@ defmodule IpMajor.Contexts.UserContext do
 
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> User.registration_changeset(attrs)
     |> Repo.insert()
+  end
+
+  def get_user_by_username(username) do
+    User
+    |> where(username: ^username)
+    |> Repo.one()
+
   end
 
 
@@ -35,11 +45,21 @@ defmodule IpMajor.Contexts.UserContext do
     Repo.all(User)
   end
 
-  def get_user(id), do: Repo.get!(User, id)
+  def get_user!(id), do: Repo.get!(User, id)
+  def get_user(id), do: Repo.get(User, id)
+  def get_user_by_email(email) do
+    User
+    |> where(email: ^email)
+    |> Repo.one()
+  end
+
+  def authenticate_user(username, password) do
+    Guardian.authenticate(username, password)
+  end
 
   def update_user(%User{} = user, attrs) do
     user
-    |> User.changeset(attrs)
+    |> User.registration_changeset(attrs)
     |> Repo.update()
     |> notify_subscribers([:user, :updated])
 

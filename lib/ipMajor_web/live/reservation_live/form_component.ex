@@ -44,7 +44,6 @@ defmodule IpMajorWeb.ReservationLive.FormComponent do
 
   defp save_reservation(socket, :new, reservation_params) do
     IO.inspect(reservation_params)
-    require IEx; IEx.pry()
 
     case Reservations.create_reservation(socket.assigns.reservation, reservation_params) do
       {:ok, reservation} ->

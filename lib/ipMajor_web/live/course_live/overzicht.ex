@@ -4,17 +4,22 @@ defmodule IpMajorWeb.CourseLive.Overzicht do
   alias IpMajor.Contexts.Courses
   alias IpMajor.Course
   alias IpMajorWeb.CourseLive.TableComponent
+  alias IpMajor.Server
 
   @impl true
   def mount(_params, _session, socket) do
+    case Server.lookup(:user, :token) do
+      {:ok, token} ->
+        IO.inspect(token)
+      end
+
+
     socket = socket
     |> assign(:showTable, false)
     {:ok, socket}
   end
 
   def handle_event("showTable",%{"id" => id}, socket) do
-    require IEx; IEx.pry()
-
     socket = socket
     |> assign(:idCourse, String.to_integer(id))
     |> assign(:showTable, true)

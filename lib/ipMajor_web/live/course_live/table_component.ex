@@ -8,7 +8,6 @@ defmodule IpMajorWeb.CourseLive.TableComponent do
   end
 
   def update(assigns, socket) do
-    require IEx; IEx.pry()
     {:ok, socket
     |> assign(assigns)
     |> assign(:course, Courses.get_course!(assigns.idCourse))}

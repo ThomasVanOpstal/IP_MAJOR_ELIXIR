@@ -22,8 +22,7 @@
                 let={f}
                 for={@changeset}
                 id="login-form"
-                phx-change="validate"
-                phx-submit="save">
+                phx-submit="login">
                   <div>
                       <label for="signup_name" >Name</label>
                       <div >
@@ -45,21 +44,11 @@
                       </div>
                       <%= error_tag f, :not_hashed_password %>
                   </div>
-                  <div >
-                      <label for="signup_password_confirmation" >Password Confirmation</label>
-                      <div>
-                          <%= password_input f, :password_confirmation %>
-                          <span >
-                              <i></i>
-                          </span>
-                      </div>
-                      <%= error_tag f, :password_confirmation %>
-                  </div>
                   <div>
                       <div >
                           <%= submit [phx_disable_with: "Saving..."] do %>
                               <span>
-                                  Continue
+                                  Submit
                               </span>
                               <span >
                                   <i ></i>

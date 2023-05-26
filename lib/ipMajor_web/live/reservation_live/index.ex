@@ -33,9 +33,10 @@ defmodule IpMajorWeb.ReservationLive.Index do
     |> assign(:reservation, nil)
   end
 
+
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    reservation = Reservations.get_reservation!(id)
+    reservation = Reservations.get_reservation(id)
     {:ok, _} = Reservations.delete_reservation(reservation)
 
     {:noreply, assign(socket, :reservations, list_reservations())}
