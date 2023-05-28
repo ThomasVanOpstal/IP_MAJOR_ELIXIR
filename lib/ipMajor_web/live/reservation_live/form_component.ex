@@ -34,7 +34,6 @@ defmodule IpMajorWeb.ReservationLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Reservation updated successfully")
-         |> IO.inspect()
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -43,18 +42,16 @@ defmodule IpMajorWeb.ReservationLive.FormComponent do
   end
 
   defp save_reservation(socket, :new, reservation_params) do
-    IO.inspect(reservation_params)
-    require IEx; IEx.pry()
-
     case Reservations.create_reservation(socket.assigns.reservation, reservation_params) do
       {:ok, reservation} ->
+        IO.inspect(reservation)
         {:noreply,
-
          socket
          |> put_flash(:info, "Reservation created successfully")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect("error")
         {:noreply, assign(socket, changeset: changeset)}
     end
   end

@@ -14,7 +14,7 @@ defmodule IpMajorWeb.ReservationLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:reservation, Reservations.get_reservation!(id))}
+     |> assign(:reservation, Reservations.get_reservation(id))}
   end
 
   defp page_title(:show), do: "Show Reservation"

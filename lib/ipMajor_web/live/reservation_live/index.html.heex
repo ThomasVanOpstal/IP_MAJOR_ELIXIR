@@ -7,7 +7,7 @@
       title={@page_title}
       action={@live_action}
       reservation={@reservation}
-      return_to={Routes.payment_index_path(@socket, :index)}
+      return_to={Routes.reservation_index_path(@socket, :index)}
     />
   </.modal>
 <% end %>
@@ -34,7 +34,7 @@
           <td class="px-6 py-4"><%= reservation.duration %></td>
 
           <td class="px-6 py-4">
-            <span><%= live_redirect "Show", to: Routes.reservation_show_path(@socket, :show, reservation) %></span>
+            <span><%= live_redirect "Show", to: Routes.reservation_show_path(@socket, :show, reservation.id) %></span>
             <span><%= live_patch "Edit", to: Routes.reservation_index_path(@socket, :edit, reservation) %></span>
             <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: reservation.id, data: [confirm: "Are you sure?"] %></span>
           </td>
@@ -42,5 +42,4 @@
       <% end %>
     </tbody>
   </table>
-  <span><%= live_patch "New Reservation", to: Routes.reservation_index_path(@socket, :new) %></span>
 </div>
