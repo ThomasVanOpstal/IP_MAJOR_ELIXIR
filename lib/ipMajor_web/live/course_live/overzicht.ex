@@ -8,12 +8,6 @@ defmodule IpMajorWeb.CourseLive.Overzicht do
 
   @impl true
   def mount(_params, _session, socket) do
-    case Server.lookup(:user, :token) do
-      {:ok, token} ->
-        IO.inspect(token)
-      end
-
-
     socket = socket
     |> assign(:showTable, false)
     {:ok, socket}

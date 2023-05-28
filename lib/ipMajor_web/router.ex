@@ -14,16 +14,13 @@ defmodule IpMajorWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
-  pipeline :auth do
-    plug IpMajorWeb.Auth.AuthPlug
-  end
   pipeline :ensure_auth do
     plug IpMajorWeb.Auth.Redirect
 
   end
 
   scope "/", IpMajorWeb do
-    pipe_through [:browser, :auth]
+    pipe_through [:browser]
 
     live "/login", LoginLive.Index, :index
 

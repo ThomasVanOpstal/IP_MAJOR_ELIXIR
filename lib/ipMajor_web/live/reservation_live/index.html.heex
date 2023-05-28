@@ -7,7 +7,7 @@
       title={@page_title}
       action={@live_action}
       reservation={@reservation}
-      return_to={Routes.payment_index_path(@socket, :index)}
+      return_to={Routes.reservation_index_path(@socket, :index)}
     />
   </.modal>
 <% end %>
@@ -42,5 +42,4 @@
       <% end %>
     </tbody>
   </table>
-  <span><%= live_patch "New Reservation", to: Routes.reservation_index_path(@socket, :new) %></span>
 </div>

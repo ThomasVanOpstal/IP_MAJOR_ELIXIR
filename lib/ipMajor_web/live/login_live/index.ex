@@ -2,7 +2,7 @@ defmodule IpMajorWeb.LoginLive.Index do
     use IpMajorWeb, :live_view
 
     alias IpMajor.Contexts.{Profiles, UserContext}
-    alias IpMajor.{Profile, User}
+    alias IpMajor.{Profile, User, Server}
     alias IpMajor.Repo
     alias IpMajorWeb.Auth.Guardian
 
@@ -52,7 +52,8 @@ defmodule IpMajorWeb.LoginLive.Index do
     end
 
     defp login_reply({:ok, user, token}, socket) do
-      IO.puts(IpMajor.Server.push(token))
+      :ets.insert(:user, {:token, token})
+      Server.push(token)
 
 
       socket
